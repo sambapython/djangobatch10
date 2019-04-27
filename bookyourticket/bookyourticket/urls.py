@@ -17,7 +17,29 @@ from django.contrib import admin
 from django.urls import path
 from django.http import HttpResponse
 def fun(request):
-	obj = HttpResponse("Hello")
+	resp="""
+	<table border=1 >
+				<tr>
+					<th>movie name</th>
+					<th>movie cast</th>
+					<th>movie description</th>
+					<th>movie rating</th>
+				</tr>
+				<tr>
+					<td>jersey</td>
+					<td>nani,</td>
+					<td>sports,sentiments</td>
+					<td>93%</td>
+				</tr>
+				<tr>
+					<td>kalank</td>
+					<td>varun</td>
+					<td>drama, </td>
+					<td>93%</td>
+				</tr>
+			</table>
+	"""
+	obj = HttpResponse(resp)
 	#print(obj.get())
 	return obj
 
