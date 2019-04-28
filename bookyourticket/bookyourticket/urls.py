@@ -16,34 +16,10 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from django.http import HttpResponse
-def fun(request):
-	resp="""
-	<table border=1 >
-				<tr>
-					<th>movie name</th>
-					<th>movie cast</th>
-					<th>movie description</th>
-					<th>movie rating</th>
-				</tr>
-				<tr>
-					<td>jersey</td>
-					<td>nani,</td>
-					<td>sports,sentiments</td>
-					<td>93%</td>
-				</tr>
-				<tr>
-					<td>kalank</td>
-					<td>varun</td>
-					<td>drama, </td>
-					<td>93%</td>
-				</tr>
-			</table>
-	"""
-	obj = HttpResponse(resp)
-	#print(obj.get())
-	return obj
-
+from bookticket.views import users_view, home_view, register_view
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('home/', fun),
+    path('', home_view),
+    path('users/', users_view),
+    path("register/",register_view)
 ]

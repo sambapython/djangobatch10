@@ -1,0 +1,13 @@
+{% extends 'home.html'%}
+{% block content%}
+
+	<h1>Registration page</h1>
+	<form method="post">
+		{% csrf_token %}
+		Username: <input type="text" name="user_name"><br>
+		password: <input type="password" name="pwd"><br>
+		phone: <input type="text" name="phone_number"><br>
+		email: <input type="email" name="email_address">
+		<input type="submit" name="">
+	</form>
+{% endblock %}
