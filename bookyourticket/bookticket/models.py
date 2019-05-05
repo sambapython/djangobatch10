@@ -5,10 +5,13 @@ from django.contrib.auth.models import User
 class Language(models.Model):
 	name=models.CharField(max_length=60)
 
+	def __str__(self):
+		return self.name
+
 
 class Movie(models.Model):
 	#languages=[("t","TELUGU"),("e","ENGLISH"),("h","HINDHI")]
-	name = models.CharField(max_length=300)
+	name = models.CharField(max_length=300, unique=True)
 	description = models.TextField(blank=True, null=True)
 	cast = models.CharField(max_length=250,blank=True, null=True)
 	languages = models.ManyToManyField(Language)
@@ -16,6 +19,9 @@ class Movie(models.Model):
 	threed = models.BooleanField(default=False)
 	rating = models.IntegerField(default=1)
 	createdby=models.ForeignKey(User, blank=True, null=True, on_delete=models.PROTECT)
+
+	def __str__(self):
+		return "%s,%s"%(self.name, self.rating)
 
 	
 

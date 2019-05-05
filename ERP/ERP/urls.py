@@ -1,4 +1,4 @@
-"""bookyourticket URL Configuration
+"""ERP URL Configuration
 
 The `urlpatterns` list routes URLs to views. For more information please see:
     https://docs.djangoproject.com/en/2.2/topics/http/urls/
@@ -14,10 +14,17 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path,include
-from django.http import HttpResponse
-from bookticket import urls as bookticket_urls
+from django.urls import path, include
+from sales.views import sales_index_view
+from pur.views import pur_index_view
+from accounts.views import accounts_index_view
+from sales import urls as sales_urls
+from accounts import urls as accounts_urls
+from pur import urls as pur_urls
+
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path("bookticket/",include(bookticket_urls))
+    path("sales/",include(sales_urls)),
+    path("pur/",include(pur_urls)),
+    path("accounts/",include(accounts_urls)),
 ]

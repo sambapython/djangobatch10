@@ -1,0 +1,34 @@
+{% extends 'bookticket/home.html'%}
+{% block pageheader%}
+		Movies
+{% endblock %}
+{% block content%}
+	<h2><a href="/bookticket/create_movie">CREATE MOVIE</a></h2>
+	<p>Showing movies list </p>
+	<table border=1>
+		<thead>
+			<tr>
+				<th>Name</th>
+				<th>Cast</th>
+				<th>description</th>
+				<th>TWOD</th>
+				<th>THREED</th>
+				<th>RATING</th>
+				<th>created by</th>
+			</tr>
+		</thead>
+		<tbody>
+			{% for movie in data%}
+			<tr>
+				<td>{{ movie.name }}</td>
+				<td>{{ movie.cast}}</td>
+				<td>{{ movie.description}}</td>
+				<td>{{ movie.twod}}</td>
+				<td>{{ movie.threed}}</td>
+				<td>{{ movie.rating}}</td>
+				<td>{{ movie.createdby}}</td>
+			</tr>
+			{% endfor %}			
+		</tbody>
+	</table>
+{% endblock %}
