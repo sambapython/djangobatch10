@@ -5,6 +5,10 @@
 {% block content%}
 	<h2><a href="/bookticket/create_movie">CREATE MOVIE</a></h2>
 	<p>Showing movies list </p>
+	<form>
+		{{form.as_table}}
+		<input type="submit" name="" value="GET MOIVES">
+	</form>
 	<table border=1>
 		<thead>
 			<tr>
@@ -15,6 +19,7 @@
 				<th>THREED</th>
 				<th>RATING</th>
 				<th>created by</th>
+				<th>OPERATIONS</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -27,6 +32,9 @@
 				<td>{{ movie.threed}}</td>
 				<td>{{ movie.rating}}</td>
 				<td>{{ movie.createdby}}</td>
+				<td><a href="/bookticket/update_movie/{{movie.id}}">UPDATE</a>
+					<a href="/bookticket/delete_movie/{{movie.id}}">DELETE</a>
+				</td>
 			</tr>
 			{% endfor %}			
 		</tbody>

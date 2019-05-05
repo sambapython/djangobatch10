@@ -2,7 +2,31 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.contrib.auth.models import User
 from bookticket.models import Movie
-from bookticket.forms import MovieForm
+from bookticket.forms import MovieForm, MovieSearchForm
+def delete_movie(request, pk):
+	movie = Movie.objects.get(pk=pk)
+	msg=""
+	if request.method=="POST":
+		movie.delete()
+		return redirect("/bookticket/movies")
+	form = MovieForm(instance=movie)
+	return render(request, "bookticket/delete_movie.html",
+		{"form":form,"message":msg})
+
+def update_movie(request, pk):
+	movie = Movie.objects.get(pk=pk)
+	msg=""
+	if request.method=="POST":
+		form = MovieForm(request.POST, instance=movie)
+		if form.is_valid():
+			form.save()
+			return redirect("/bookticket/movies")
+		else:
+			msg=form._errors
+	form = MovieForm(instance=movie)
+	return render(request, "bookticket/update_movie.html",
+		{"form":form,"message":msg})
+
 def create_movie(request):
 	msg=""
 	if request.method=="POST":
@@ -17,8 +41,19 @@ def create_movie(request):
 		form  = MovieForm()
 	return render(request,"bookticket/create_movie.html",{"form":form,"message":msg})
 def movies_view(request):
-	all_movies = Movie.objects.all()
-	return render(request,"bookticket/movies.html",{"data":all_movies})
+	params = request.GET 
+	if params:
+		twod=True if params["twod"]=="on" else False
+		threed=True if params["threed"]=="on" else False
+		data = Movie.objects.filter(name=params["name"],
+			rating=params["rating"],
+			twod=twod,
+			threed=threed)
+	else:
+		data = Movie.objects.all()
+	form = MovieSearchForm()
+	return render(request,"bookticket/movies.html",
+		{"data":data,"form":form})
 def register_view(request):
 	msg=""
 	if request.method=="POST":

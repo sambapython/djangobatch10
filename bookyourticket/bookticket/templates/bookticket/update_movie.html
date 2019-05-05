@@ -1,0 +1,12 @@
+{% extends "bookticket/home.html"%}
+{% block pageheader%}
+	MOVIE UPDATE
+{% endblock%}
+{% block content%}
+	<p>{{ message }}</p>
+	<form method="post">
+		{% csrf_token%}
+		{{ form.as_p}}
+		<input type="submit" name="" value="UPDATE MOVIE">
+	</form>
+{% endblock%}
