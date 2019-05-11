@@ -28,6 +28,12 @@ class Movie(models.Model):
 
 	def __str__(self):
 		return "%s,%s"%(self.name, self.rating)
-
+class Theater(models.Model):
+	name=models.CharField(max_length=250)
+	address = models.TextField()
+	number_seats = models.IntegerField()
+	createdby = models.ForeignKey(User, blank=True, null=True, on_delete=models.PROTECT)
+	rating = models.IntegerField(default=1)
+	status = models.BooleanField(default=True)
 	
 

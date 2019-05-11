@@ -1,4 +1,5 @@
 {% extends 'bookticket/home.html'%}
+{% load crispy_forms_tags %}
 {% block pageheader%}
 		Movies
 {% endblock %}
@@ -6,10 +7,10 @@
 	<h2><a href="/bookticket/create_movie">CREATE MOVIE</a></h2>
 	<p>Showing movies list </p>
 	<form>
-		{{form.as_table}}
+		{{form|crispy}}
 		<input type="submit" name="" value="GET MOIVES">
 	</form>
-	<table border=1>
+	<table border=1 id="movies_list">
 		<thead>
 			<tr>
 				<th>Name</th>
@@ -19,7 +20,9 @@
 				<th>THREED</th>
 				<th>RATING</th>
 				<th>created by</th>
+				<th>Languages</th>
 				<th>OPERATIONS</th>
+
 			</tr>
 		</thead>
 		<tbody>
@@ -32,6 +35,11 @@
 				<td>{{ movie.threed}}</td>
 				<td>{{ movie.rating}}</td>
 				<td>{{ movie.createdby}}</td>
+				<td>
+					{% for lang in movie.languages.all%}
+					{{ lang.name}},
+					{% endfor%}
+				</td>
 				<td><a href="/bookticket/update_movie/{{movie.id}}">UPDATE</a>
 					<a href="/bookticket/delete_movie/{{movie.id}}">DELETE</a>
 				</td>
@@ -39,4 +47,11 @@
 			{% endfor %}			
 		</tbody>
 	</table>
+	<script type="text/javascript">
+		$(document).ready(function() {
+		    $('#movies_list').DataTable( {
+		        "pagingType": "full_numbers"
+		    } );
+		} );
+	</script>
 {% endblock %}

@@ -1,0 +1,50 @@
+{% extends 'bookticket/home.html'%}
+{% load crispy_forms_tags %}
+{% block pageheader%}
+		Theaters
+{% endblock %}
+{% block content%}
+	<h2><a href="/bookticket/create_theater">CREATE Theater</a></h2>
+	<p>Showing Theaters list </p>
+	<form>
+		{{form|crispy}}
+		<input type="submit" name="" value="GET Theaters">
+	</form>
+	<table border=1 id="theater_list">
+		<thead>
+			<tr>
+				<th>Name</th>
+				<th>Address</th>
+				<th>RATING</th>
+				<th>#SEATS</th>
+				<th>OPERATIONS</th>
+
+			</tr>
+		</thead>
+		<tbody>
+			{% for theater in object_list%}
+			<tr>
+				<td>{{ theater.name }}</td>
+				<td>{{ theater.address}}</td>
+				<td>{{ theater.rating}}</td>
+				<td>{{ theater.number_seats}}</td>
+				<td>
+					{% for lang in movie.languages.all%}
+					{{ lang.name}},
+					{% endfor%}
+				</td>
+				<td><a href="/bookticket/update_theater/{{theater.id}}">UPDATE</a>
+					<a href="/bookticket/delete_theater/{{theater.id}}">DELETE</a>
+				</td>
+			</tr>
+			{% endfor %}			
+		</tbody>
+	</table>
+	<script type="text/javascript">
+		$(document).ready(function() {
+		    $('#theater_list').DataTable( {
+		        "pagingType": "full_numbers"
+		    } );
+		} );
+	</script>
+{% endblock %}

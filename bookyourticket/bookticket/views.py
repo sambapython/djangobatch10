@@ -3,6 +3,8 @@ from django.http import HttpResponse
 from django.contrib.auth.models import User
 from bookticket.models import Movie
 from bookticket.forms import MovieForm, MovieSearchForm
+from django.core.paginator import Paginator
+from django.conf import settings
 def delete_movie(request, pk):
 	movie = Movie.objects.get(pk=pk)
 	msg=""
@@ -42,16 +44,40 @@ def create_movie(request):
 	return render(request,"bookticket/create_movie.html",{"form":form,"message":msg})
 def movies_view(request):
 	params = request.GET 
+	data = Movie.objects.all()
+
 	if params:
-		twod=True if params["twod"]=="on" else False
-		threed=True if params["threed"]=="on" else False
-		data = Movie.objects.filter(name=params["name"],
-			rating=params["rating"],
-			twod=twod,
-			threed=threed)
+		if "twod" in params:
+			twod=True if params["twod"]=="on" else False
+			data = data.filter(twod=twod)
+		if "threed" in params:
+			threed=True if params["threed"]=="on" else False
+			data = data.filter(threed=threed)
+		if "name" in params:
+			name=params["name"]
+			data = data.filter(name__contains=name)
+		if "language" in params:
+			language = params["language"]
+			if language:
+				data = data.filter(languages=language)
+		form = MovieSearchForm(data=params)
 	else:
-		data = Movie.objects.all()
-	form = MovieSearchForm()
+		form = MovieSearchForm()
+	try:
+		num_records_page = settings.NUM_RECORDS_PAGES
+	except:
+		num_records_page = 100
+	pages = Paginator(data, num_records_page)
+	
+	if "page" in params:
+		page_num = params["page"]
+		if page_num:
+			page_num = int(page_num)
+		else:
+			page_num =1
+	else:
+		page_num=1
+	data = pages.page(page_num)
 	return render(request,"bookticket/movies.html",
 		{"data":data,"form":form})
 def register_view(request):
