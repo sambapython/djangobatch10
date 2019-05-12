@@ -1,6 +1,7 @@
 from django.forms import ModelForm, Form
 from bookticket.models import Movie, Language
 from django import forms
+
 class MovieForm(ModelForm):
     class Meta:
         model = Movie

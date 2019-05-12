@@ -1,0 +1,8 @@
+{% extends "bookticket/index.html"%}
+{% block content %}
+<form method="post">
+	{% csrf_token%}
+	<input type="submit" name="" value="CONFIRM LOGOUT">
+	<a href="/bookticket/index"><input type="button" name="" value="CANCEL"></a>
+</form>
+{% endblock %}

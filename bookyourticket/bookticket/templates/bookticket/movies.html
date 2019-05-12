@@ -21,6 +21,7 @@
 				<th>RATING</th>
 				<th>created by</th>
 				<th>Languages</th>
+				<th>POSTER</th>
 				<th>OPERATIONS</th>
 
 			</tr>
@@ -35,11 +36,13 @@
 				<td>{{ movie.threed}}</td>
 				<td>{{ movie.rating}}</td>
 				<td>{{ movie.createdby}}</td>
+				
 				<td>
-					{% for lang in movie.languages.all%}
+ 					{% for lang in movie.languages.all%}
 					{{ lang.name}},
 					{% endfor%}
 				</td>
+				<td><img src="/media/{{movie.poster}}" width="50" height="50"></td>
 				<td><a href="/bookticket/update_movie/{{movie.id}}">UPDATE</a>
 					<a href="/bookticket/delete_movie/{{movie.id}}">DELETE</a>
 				</td>

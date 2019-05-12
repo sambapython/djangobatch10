@@ -17,6 +17,7 @@
 				<th>Address</th>
 				<th>RATING</th>
 				<th>#SEATS</th>
+				<th>image</th>
 				<th>OPERATIONS</th>
 
 			</tr>
@@ -28,6 +29,8 @@
 				<td>{{ theater.address}}</td>
 				<td>{{ theater.rating}}</td>
 				<td>{{ theater.number_seats}}</td>
+				<td><img src="/media/{{ theater.image }}" alt="no imgae"
+					width="50" height="50"></td>
 				<td>
 					{% for lang in movie.languages.all%}
 					{{ lang.name}},

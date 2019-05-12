@@ -3,7 +3,7 @@
 
 {% block content%}
 <p>{{ message}}</p>
-	<form method="post">
+	<form method="post" enctype="multipart/form-data">
 		{% csrf_token %}
 	{{ form|crispy}}
 	<input type="submit" name="" value="CREATE MOVIE">

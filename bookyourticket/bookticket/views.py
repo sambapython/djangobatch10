@@ -5,6 +5,38 @@ from bookticket.models import Movie
 from bookticket.forms import MovieForm, MovieSearchForm
 from django.core.paginator import Paginator
 from django.conf import settings
+from django.contrib.auth.forms import AuthenticationForm
+from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.views import login_required 
+def logout_view(request):
+	if request.method=="POST":
+		logout(request)
+		return redirect("/bookticket/")
+	else:
+		return render(request, "bookticket/confirm_logout.html")
+def login_view(request):
+	msg=""
+	if request.method=="POST":
+		username = request.POST.get("username")
+		password=request.POST.get("password")
+		user = authenticate(username=username,password=password)
+		if user:
+			login(request, user=user)
+			msg = "login successfully"
+			redirect_url = request.GET.get("next",None)
+			if not redirect_url:
+				redirect_url = "/bookticket/index"
+			return redirect(redirect_url)
+		else:
+			msg="failed"
+		form = AuthenticationForm(data = request.POST)
+
+	else:
+		form = AuthenticationForm()
+	return render(request, "bookticket/login.html",
+		{"form":form,"message":msg})
+
+@login_required
 def delete_movie(request, pk):
 	movie = Movie.objects.get(pk=pk)
 	msg=""
@@ -15,11 +47,12 @@ def delete_movie(request, pk):
 	return render(request, "bookticket/delete_movie.html",
 		{"form":form,"message":msg})
 
+@login_required
 def update_movie(request, pk):
 	movie = Movie.objects.get(pk=pk)
 	msg=""
 	if request.method=="POST":
-		form = MovieForm(request.POST, instance=movie)
+		form = MovieForm(request.POST, request.FILES, instance=movie)
 		if form.is_valid():
 			form.save()
 			return redirect("/bookticket/movies")
@@ -29,10 +62,12 @@ def update_movie(request, pk):
 	return render(request, "bookticket/update_movie.html",
 		{"form":form,"message":msg})
 
+@login_required
 def create_movie(request):
 	msg=""
 	if request.method=="POST":
-		form = MovieForm(request.POST)
+
+		form = MovieForm(request.POST, request.FILES)
 		if form.is_valid():
 			form.save()
 			return redirect("/bookticket/movies")
@@ -42,6 +77,7 @@ def create_movie(request):
 	else:
 		form  = MovieForm()
 	return render(request,"bookticket/create_movie.html",{"form":form,"message":msg})
+
 def movies_view(request):
 	params = request.GET 
 	data = Movie.objects.all()

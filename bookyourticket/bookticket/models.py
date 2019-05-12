@@ -25,7 +25,8 @@ class Movie(models.Model):
 	threed = models.BooleanField(default=False)
 	rating = models.IntegerField(default=1, validators=(validate_rating,))
 	createdby=models.ForeignKey(User, blank=True, null=True, on_delete=models.PROTECT)
-
+	poster = models.ImageField(blank=True, null=True)
+	
 	def __str__(self):
 		return "%s,%s"%(self.name, self.rating)
 class Theater(models.Model):
@@ -35,5 +36,6 @@ class Theater(models.Model):
 	createdby = models.ForeignKey(User, blank=True, null=True, on_delete=models.PROTECT)
 	rating = models.IntegerField(default=1)
 	status = models.BooleanField(default=True)
+	image = models.ImageField(blank=True, null=True)
 	
 

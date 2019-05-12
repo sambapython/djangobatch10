@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  {% load static%}
   <title>BOOK MY TICKET</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -11,20 +12,30 @@
   <script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.js"></script>
   <script type="text/javascript" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
   <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css">
+  <link rel="stylesheet" type="text/css" href="{% static 'css/main.css'%}">
 </head>
-<body style="height:1500px">
+
+<body>
 
 <nav class="navbar navbar-inverse navbar-fixed-top">
   <div class="container-fluid">
     <div class="navbar-header">
-      <a class="navbar-brand" href="#">BOOK MY TICKET</a>
-      <a class="navbar-brand" href="#">LOGO</a>
+            <a class="navbar-brand" href="#">BOOK MY TICKET</a>
+      <a class="navbar-brand" href="#"><img src="{% static 'images/logo.jpg'%} " width="50" height="50"></a>
     </div>
     <ul class="nav navbar-nav">
-      <li><a href="#">LOGIN</a></li>
-      <li><a href="/bookticket/register">REGISTER</a></li>
+      {% block all%}
       <li><a href="/bookticket/movies">Movies</a></li>
-      <li><a href="/bookticket/theaters">Theaters</a></li>
+      {% if request.user.is_authenticated%}
+       <li><a href="/bookticket/theaters">Theaters</a></li>
+      <li><a href="/bookticket/logout">LOGOUT</a></li>
+      <li><a href="#"</a>HELLO {{request.user.username}}</li>
+      {% else %}
+        <li><a href="/bookticket/login">LOGIN</a></li>
+        <li><a href="/bookticket/register">REGISTER</a></li>
+      {% endif %}
+      
+      {% endblock %}
     </ul>
   </div>
 </nav>

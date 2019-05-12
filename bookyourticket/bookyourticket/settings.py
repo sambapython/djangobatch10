@@ -122,3 +122,6 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 NUM_RECORDS_PAGES = 100
+LOGIN_URL = "/bookticket/login"
+MEDIA_URL= "/media/"
+MEDIA_ROOT = os.path.join(BASE_DIR, "media")
