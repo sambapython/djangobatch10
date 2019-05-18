@@ -1,3 +1,4 @@
+
 """bookyourticket URL Configuration
 
 The `urlpatterns` list routes URLs to views. For more information please see:
@@ -13,15 +14,10 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
-from django.contrib import admin
-from django.urls import path,include
-from django.http import HttpResponse
-from bookticket import urls as bookticket_urls
-from api import urls as api_urls
+from django.urls import path
 from django.conf import settings 
 from django.conf.urls.static import static
+from api.views import MovieAPIView
 urlpatterns = [
-    path('admin/', admin.site.urls),
-    path("bookticket/",include(bookticket_urls)),
-    path("api/",include(api_urls)),
+    path("movies/",MovieAPIView.as_view()),
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
