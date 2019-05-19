@@ -15,3 +15,4 @@ class MovieSearchForm(Form):
     twod = forms.CharField(widget=forms.widgets.CheckboxInput, required=False)
     threed = forms.CharField(widget=forms.widgets.CheckboxInput, required=False)
     page = forms.CharField(max_length=10, required=False)
+    

@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'rest_framework',
     'bookticket',
     'crispy_forms',
 ]
@@ -50,6 +51,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'bookticket.middleware.REQTrack'
 ]
 
 ROOT_URLCONF = 'bookyourticket.urls'
@@ -125,3 +127,5 @@ NUM_RECORDS_PAGES = 100
 LOGIN_URL = "/bookticket/login"
 MEDIA_URL= "/media/"
 MEDIA_ROOT = os.path.join(BASE_DIR, "media")
+
+AUTH_USER_MODEL = "bookticket.OwnUser"

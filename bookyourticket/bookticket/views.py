@@ -70,6 +70,7 @@ def create_movie(request):
 		form = MovieForm(request.POST, request.FILES)
 		if form.is_valid():
 			form.save()
+
 			return redirect("/bookticket/movies")
 		else:
 			msg=form._errors
