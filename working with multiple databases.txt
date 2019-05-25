@@ -1,0 +1,22 @@
+add the below settings into settings.py
+'backup': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': os.path.join(BASE_DIR, 'db2'),
+    }
+if you migrate all your migrations to db2 database need to use backup key
+python manage.py migrate --database backup.
+If you want to save a movie in to db2 then follow the below steps.
+	from bookticket.models import Movie
+In [3]: m= Movie(name="b123", description="dsfsd", cast="sdfgsd")
+
+In [4]: m.save() # this will save the movie data into movie table in  default database.
+
+In [5]: m.save(using='backup') # this will save movie data into movie table in db2 
+database.
+
+if you want to get the data:
+Movie.objects.using('backup').all()
+
+if you want to delete data from db2 database.
+m = Movie.objects.using('backup').get(id=17)
+m.delete(using="backup") 

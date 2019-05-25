@@ -1,3 +1,4 @@
+from django.shortcuts import render, redirect
 from bookticket.models import ClientRequest
 class REQTrack:
 	def __init__(self, view):
@@ -12,5 +13,7 @@ class REQTrack:
 		resp  =self.view_fun(request)
 		cr.resp_status = resp.status_code
 		cr.save()
+		if resp.status_code == 404:
+			return render(request, "bookticket/404.html")
 		# to check the response
 		return resp

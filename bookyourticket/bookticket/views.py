@@ -1,3 +1,4 @@
+from django.core.cache import cache
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.contrib.auth.models import User
@@ -42,6 +43,7 @@ def delete_movie(request, pk):
 	msg=""
 	if request.method=="POST":
 		movie.delete()
+		cache.delete("Movie:"+str(pk))
 		return redirect("/bookticket/movies")
 	form = MovieForm(instance=movie)
 	return render(request, "bookticket/delete_movie.html",
@@ -55,6 +57,7 @@ def update_movie(request, pk):
 		form = MovieForm(request.POST, request.FILES, instance=movie)
 		if form.is_valid():
 			form.save()
+			cache.delete("Movie:"+str(pk))
 			return redirect("/bookticket/movies")
 		else:
 			msg=form._errors
@@ -79,9 +82,16 @@ def create_movie(request):
 		form  = MovieForm()
 	return render(request,"bookticket/create_movie.html",{"form":form,"message":msg})
 
-def movies_view(request):
+def movies_view(request,pk=None):
 	params = request.GET 
-	data = Movie.objects.all()
+	if pk:
+		data = cache.get("Movie:"+str(pk))
+		if not data:
+			data  = Movie.objects.filter(id=pk)
+			cache.set("Movie:"+str(pk), data)
+
+	else:
+		data = Movie.objects.all()
 
 	if params:
 		if "twod" in params:
@@ -117,6 +127,7 @@ def movies_view(request):
 	data = pages.page(page_num)
 	return render(request,"bookticket/movies.html",
 		{"data":data,"form":form})
+
 def register_view(request):
 	msg=""
 	if request.method=="POST":

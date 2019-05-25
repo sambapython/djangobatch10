@@ -13,6 +13,7 @@ urlpatterns = [
     path('',TemplateView.as_view(template_name="bookticket/home.html")),
     path('users/', users_view),
     path("register/",register_view),
+    re_path('movies/(?P<pk>[0-9]+)', movies_view),
     path('movies/', movies_view),
     path("create_movie/",create_movie),
     re_path("update_movie/(?P<pk>[0-9]+)", update_movie),# update_movie(req_obj, pk=10)
