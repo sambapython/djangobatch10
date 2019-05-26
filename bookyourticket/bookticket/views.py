@@ -9,6 +9,8 @@ from django.conf import settings
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.views import login_required 
+import logging
+logger = logging.getLogger(__name__)
 def logout_view(request):
 	if request.method=="POST":
 		logout(request)
@@ -67,22 +69,27 @@ def update_movie(request, pk):
 
 @login_required
 def create_movie(request):
+	logger.info("started movie creation")
 	msg=""
 	if request.method=="POST":
+		logger.info("got the data from client")
 
 		form = MovieForm(request.POST, request.FILES)
 		if form.is_valid():
 			form.save()
+			logger.info("moive saved successfully")
 
 			return redirect("/bookticket/movies")
 		else:
 			msg=form._errors
+			logger.error(msg)
 
 	else:
 		form  = MovieForm()
 	return render(request,"bookticket/create_movie.html",{"form":form,"message":msg})
 
 def movies_view(request,pk=None):
+	logger.info("movie url&&&&&&&&&&&&&&&&&")
 	params = request.GET 
 	if pk:
 		data = cache.get("Movie:"+str(pk))

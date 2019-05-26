@@ -1,0 +1,17 @@
+2019-05-26 07:18:03,201->INFO->movie url&&&&&&&&&&&&&&&&&->bookticket.views
+2019-05-26 07:20:29,338->INFO->movie url&&&&&&&&&&&&&&&&&->bookticket.views
+2019-05-26 07:20:42,838->INFO->started movie creation->bookticket.views
+2019-05-26 07:20:52,064->INFO->started movie creation->bookticket.views
+2019-05-26 07:20:57,833->INFO->started movie creation->bookticket.views
+2019-05-26 07:20:57,833->INFO->got the data from client->bookticket.views
+2019-05-26 07:20:57,890->INFO->moive saved successfully->bookticket.views
+2019-05-26 07:20:57,970->INFO->movie url&&&&&&&&&&&&&&&&&->bookticket.views
+2019-05-26 07:21:24,927->INFO->started movie creation->bookticket.views
+2019-05-26 07:21:44,078->INFO->started movie creation->bookticket.views
+2019-05-26 07:21:47,495->INFO->started movie creation->bookticket.views
+2019-05-26 07:21:48,806->INFO->started movie creation->bookticket.views
+2019-05-26 07:22:09,737->INFO->started movie creation->bookticket.views
+2019-05-26 07:22:09,743->INFO->got the data from client->bookticket.views
+2019-05-26 07:22:30,767->INFO->started movie creation->bookticket.views
+2019-05-26 07:22:30,771->INFO->got the data from client->bookticket.views
+2019-05-26 07:22:30,778->ERROR-><ul class="errorlist"><li>name<ul class="errorlist"><li>bnot expecting special symbols in name</li></ul></li></ul>->bookticket.views

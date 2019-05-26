@@ -1,0 +1,18 @@
+watch this videso for more knowledge on docker
+https://www.youtube.com/watch?v=sRIxHHZFwBA
+
+In UBUNTU: sudo apt-get install docker.io
+
+if you want to create ubuntu vm:
+
+	docker run -it ubuntu:18.04 bash
+
+this will runs one ubuntu container for yout to work. but you couldnot interact
+with the services runing in the containers. this will be possible through the port maping. port mapping done by using -p option
+docker run -it -p 82:80 ubuntu:18.04 bash
+
+82 is an extrnal port, 80 is an internal port i.e: any service running in docker on 80 port can be accessed by 82 port.
+
+if you want to go inside container and configure your porject, then
+
+docker exec -it container id bash

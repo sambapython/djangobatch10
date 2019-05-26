@@ -1,4 +1,5 @@
 import requests
+''''
 url = "http://localhost:8000/api/movies/"
 
 resp = requests.post(url, json={"name":"EFGH",
@@ -10,15 +11,12 @@ resp = requests.post(url, json={"name":"EFGH",
 print(resp)
 print(resp.json())
 
-'''
 resp = requests.delete(url+"4/")
 print(resp)
 print(resp.json())
-'''
 resp = requests.get(url)
 print(resp)
 print(resp.json())
-'''
 resp = requests.get("http://localhost:8000/api/movies/3")
 
 resp = requests.post("http://localhost:8000/api/movies", 
@@ -31,3 +29,17 @@ resp = requests.put("http://localhost:8000/api/movies/3")
 resp = requests.delete("http://localhost:8000/api/movies/4")
 
 '''
+url = "http://localhost:8000/api/movies/"
+
+resp = requests.post(url, json={"name":"EFGH",
+	"languages":[1,2],
+	"twod":True,
+	"threed":False,
+	"description":"comedy",},auth=("user1","user1"))
+
+print(resp)
+print(resp.json())
+resp = requests.get("http://localhost:8000/api/movies/3")
+
+print(resp)
+print(resp.json())

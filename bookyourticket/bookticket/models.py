@@ -55,8 +55,6 @@ class Movie(abs):
 	createdby=models.ForeignKey(OwnUser, blank=True, null=True, on_delete=models.PROTECT)
 	poster = models.ImageField(blank=True, null=True)
 
-	class Meta:
-		db_table=""
 
 	def get_data(self):
 		data =  {"id":self.id,"name":self.name, "description":self.description,

@@ -15,7 +15,7 @@ to install gunicorn: pip install gunicorn
 with gunicorn with multiple workers
  before goiong to add in setup.py lets test manually!!
  run the below command in your project directory.
- gunicorn --bind 0.0.0.0:9000 pgmanagement.wsgi --workers=10
+ gunicorn --bind 0.0.0.0:9000 bookyourticket.wsgi --workers=10
 
 gunicorn is running.
 lets access this with nginx.
@@ -31,10 +31,11 @@ server{
     listen 80;
     server_name localhost;
     location /{
-        proxy_pass "http://localhost:9000";
+        return 301 "http://localhost:9000/bookticket";
 }
 
 }
+
 sudo systemctl reload nginx
 sudo systemctl restart nginx
 sudo systemctl status nginx

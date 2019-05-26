@@ -1,0 +1,7 @@
+pull ubuntu os with python3
+update the os: apt-get update
+copy local sourcecode to images
+install depecdent packages: pip install -r requrements.txt
+python manage.py makemigrations
+python manage.py migrate
+pytohn manage.py runserver
