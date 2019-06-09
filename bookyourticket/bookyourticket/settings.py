@@ -134,7 +134,7 @@ NUM_RECORDS_PAGES = 100
 LOGIN_URL = "/bookticket/login"
 MEDIA_URL= "/media/"
 MEDIA_ROOT = os.path.join(BASE_DIR, "media")
-
+REDIRECTURL = "/oauth2redirect"
 AUTH_USER_MODEL = "bookticket.OwnUser"
 CACHES = {
     'default': {
@@ -185,3 +185,5 @@ LOGGING ={
                 'level': "DEBUG"},
                 },
 }
+ID = ""
+SECRET =  ""
